@@ -12,10 +12,13 @@ hpc
 
 # Plot 3
 
-plot3 <- ggplot(hpc) + 
-  geom_line(aes(date_time, Sub_metering_1)) + 
-  geom_line(aes(date_time, Sub_metering_2), color = "red") + 
-  geom_line(aes(date_time, Sub_metering_3), color = "blue") + 
-  ylab("Energy sub metering")
-plot3
-ggsave("plot3.png", plot = plot3, width = 4.8, height = 4.8, dpi=100)
+with(hpc,
+     plot(date_time, Sub_metering_1, type="l", ylab="Energy sub metering"))
+with(hpc,
+     lines(date_time, Sub_metering_2, col = "blue"))
+with(hpc,
+     lines(date_time, Sub_metering_3, col = "red"))
+legend("topright", lty = 1 , col = c("black", "blue", "red"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+dev.copy(png,'plot3.png')
+dev.off()
+

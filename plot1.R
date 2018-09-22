@@ -10,7 +10,10 @@ hpc <- mutate(hpc, date_time = ymd_hms(date_time))
 hpc
 
 # Plot 1
-plot1 <- ggplot(hpc, aes(Global_active_power)) + geom_histogram(color = "black", fill = "red") + 
-  xlab("Global Avtive Power (kilowatts)") + ylab("Frequency") + ggtitle("Global Active Power") 
-plot1
-ggsave("plot1.png", plot = plot1, width = 4.8, height = 4.8, dpi=100)
+
+with(hpc,
+     hist(Global_active_power, col = "red", xlab = "Global Avtive Power (kilowatts)", main = "Global Active Power"))
+
+dev.copy(png,'plot1.png')
+dev.off()
+

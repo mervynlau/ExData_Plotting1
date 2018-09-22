@@ -9,9 +9,11 @@ hpc <- filter(hpc, Date >= ymd("2007-02-01") & Date <= ymd("2007-02-02")) %>% mu
 hpc <- mutate(hpc, date_time = ymd_hms(date_time))            
 hpc
 
+with(hpc,
+ plot(date_time, Global_active_power, type="l", ylab = "Global Avtive Power (kilowatts)")
+)
 
-# Plot 2
-plot2<- ggplot(hpc, aes(date_time, Global_active_power)) + geom_line() + 
-  ylab("Global Avtive Power (kilowatts)")
-plot2
-ggsave("plot2.png", plot = plot2, width = 4.8, height = 4.8, dpi=100)
+dev.copy(png,'plot2.png')
+dev.off()
+
+
